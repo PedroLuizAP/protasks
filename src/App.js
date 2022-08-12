@@ -1,24 +1,49 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react';
+
+let initialState =[
+  {
+    id: 1,
+    description: "First Task",
+  },
+  {
+    id: 2,
+    description: "Second Task",
+  }
+
+];
 
 function App() {
+
+  const [tasks, setTasks] = useState(initialState)
+
+  //const tasks = ;
+
+  function addTask(e){
+    e.preventDefault();
+
+    const task = {
+      id: document.getElementById('id').value,
+      description: document.getElementById('description').value
+    }
+
+    setTasks([...tasks, {...task}]);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <form>
+        <input id="id" type="text" placeholder="id"/>
+        <input id="description" type="text" placeholder="description"/>
+        <button onClick={addTask}>+ Task</button>
+      </form>
+      <div className="mt-3">
+        <ul className="list-group">
+          {tasks.map(task => (
+            <li key={task.id} className="list-group-item">{task.id}-{task.description}</li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }
 
