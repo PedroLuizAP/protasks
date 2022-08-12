@@ -36,6 +36,7 @@ function App() {
         <input id="description" type="text" placeholder="description"/>
         <button onClick={addTask}>+ Task</button>
       </form>
+      
       <div className="mt-3">
         <ul className="list-group">
           {tasks.map(task => (
