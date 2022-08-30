@@ -11,8 +11,14 @@ let initialState = [
   {
     id: 2,
     description: "Second Task",
-    title: "First Title",
+    title: "Second Title",
     priority: "2",
+  },
+  {
+    id: 3,
+    description: "Third Task",
+    title: "Third Title",
+    priority: "3",
   },
 ];
 
@@ -53,20 +59,20 @@ function App() {
     }
   }
 
-  function priorityStyle(param) {
+  function priorityStyle(param, icon) {
     switch (param) {
 
       case "1":
-        return "smile";
+        return  icon ? "smile" : "success";
 
       case "2":
-        return "meh";
+        return icon ? "meh" : "warning";
 
       case "3":
-        return "frown";
+        return icon ? "frown" : "danger";
 
       default:
-        return "circle";
+        return icon ? "circle" : "";
     }
   }
 
@@ -75,7 +81,7 @@ function App() {
       <form className="row g-3">
         <div className="col-md-6">
           <label className="form-label">Id</label>
-          <input id="id" type="text" placeholder="id" className="form-control" />
+          <input id="id" type="text" placeholder="id" className="form-control" readOnly value={Math.max.apply(Math, tasks.map(t => t.id)) + 1}/>
         </div>
 
         <div className="col-md-6">
@@ -107,8 +113,8 @@ function App() {
 
       <div className="mt-3">
         {tasks.map((task) => (
-          <div key={task.id} className="card mb-2 shadow-sm">
-            <div className="card-body">
+          <div key={task.id} className={"card mb-2 shadow-sm border-"+priorityStyle(task.priority, false)}>
+            <div className={"card-body text-" + priorityStyle(task.priority, false)}>
               <div className="d-flex justify-content-between">
                 <h5 className="card-title">
                   <span className="badge bg-secondary me-1">
@@ -118,8 +124,8 @@ function App() {
                 </h5>
                 <h6>
                   priority:
-                  <span className="ms-1 text-black">
-                    <i className={"me-1 far fa-"+priorityStyle(task.priority)} />
+                  <span className="ms-1 text">
+                    <i className={"me-1 far fa-"+priorityStyle(task.priority, true)} />
                     {priorityLabel(task.priority)}
                   </span>
                 </h6>
