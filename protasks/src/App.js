@@ -114,7 +114,7 @@ function App() {
       <div className="mt-3">
         {tasks.map((task) => (
           <div key={task.id} className={"card mb-2 shadow-sm border-"+priorityStyle(task.priority, false)}>
-            <div className={"card-body text-" + priorityStyle(task.priority, false)}>
+            <div className="card-body">
               <div className="d-flex justify-content-between">
                 <h5 className="card-title">
                   <span className="badge bg-secondary me-1">
@@ -124,7 +124,7 @@ function App() {
                 </h5>
                 <h6>
                   priority:
-                  <span className="ms-1 text">
+                  <span className={"ms-1 text-" + priorityStyle(task.priority, false)}>
                     <i className={"me-1 far fa-"+priorityStyle(task.priority, true)} />
                     {priorityLabel(task.priority)}
                   </span>
