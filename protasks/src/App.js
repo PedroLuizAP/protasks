@@ -38,6 +38,13 @@ function App() {
     };
 
     setTasks([...tasks, { ...task }]);
+
+
+  }
+
+  function deleteTask(id) {
+    const filterTasks = tasks.filter(task => task.id !== id)
+    setTasks([...filterTasks]);
   }
 
   function priorityLabel(param) {
@@ -51,9 +58,6 @@ function App() {
       case "3":
         return "High";
 
-      case "4":
-        return "Highest";
-
       default:
         return "Not definied";
     }
@@ -63,7 +67,7 @@ function App() {
     switch (param) {
 
       case "1":
-        return  icon ? "smile" : "success";
+        return icon ? "smile" : "success";
 
       case "2":
         return icon ? "meh" : "warning";
@@ -81,7 +85,7 @@ function App() {
       <form className="row g-3">
         <div className="col-md-6">
           <label className="form-label">Id</label>
-          <input id="id" type="text" placeholder="id" className="form-control" readOnly value={Math.max.apply(Math, tasks.map(t => t.id)) + 1}/>
+          <input id="id" type="text" placeholder="id" className="form-control" readOnly value={Math.max.apply(Math, tasks.map(t => t.id)) + 1} />
         </div>
 
         <div className="col-md-6">
@@ -113,7 +117,7 @@ function App() {
 
       <div className="mt-3">
         {tasks.map((task) => (
-          <div key={task.id} className={"card mb-2 shadow-sm border-"+priorityStyle(task.priority, false)}>
+          <div key={task.id} className={"card mb-2 shadow-sm border-" + priorityStyle(task.priority, false)}>
             <div className="card-body">
               <div className="d-flex justify-content-between">
                 <h5 className="card-title">
@@ -125,7 +129,7 @@ function App() {
                 <h6>
                   priority:
                   <span className={"ms-1 text-" + priorityStyle(task.priority, false)}>
-                    <i className={"me-1 far fa-"+priorityStyle(task.priority, true)} />
+                    <i className={"me-1 far fa-" + priorityStyle(task.priority, true)} />
                     {priorityLabel(task.priority)}
                   </span>
                 </h6>
@@ -139,7 +143,7 @@ function App() {
                   <i className="fas fa-pen me-2" />
                   edit
                 </button>
-                <button className="btn btn-outline-danger me-2 btn-sm" >
+                <button className="btn btn-outline-danger me-2 btn-sm" onClick={() => deleteTask(task.id)}>
                   <i className="fas fa-trash me-2" />
                   delete
                 </button>
