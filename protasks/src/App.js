@@ -1,59 +1,40 @@
 import "./App.css";
 import { useState } from "react";
+import { useEffect } from "react";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 
-let initialState = [
-  {
-    id: 1,
-    description: "First Task",
-    priority: "1",
-    title: "First Title",
-  },
-  {
-    id: 2,
-    description: "Second Task",
-    title: "Second Title",
-    priority: "2",
-  },
-  {
-    id: 3,
-    description: "Third Task",
-    title: "Third Title",
-    priority: "3",
-  },
-];
-
 function App() {
-  const [tasks, setTasks] = useState(initialState);
-  const [task, setTask] = useState(initialState);
+  const [index, setIndex] = useState(0);
+  const [tasks, setTasks] = useState([]);
+  const [task, setTask] = useState({id:0});
 
-  //const tasks = ;
+  useEffect(() => {
+    tasks.length <= 0 ? setIndex(1) : setIndex(Math.max.apply(Math, tasks.map((t) => t.id)) + 1)
+  }, [tasks]);
 
-  function addTask(e) {
-    e.preventDefault();
-
-    const task = {
-      id: Math.max.apply(Math, tasks.map((t) => t.id)) + 1,
-      title: document.getElementById("title").value,
-      description: document.getElementById("description").value,
-      priority: document.getElementById("priority").value,
-    };
-
-    setTasks([...tasks, { ...task }]);
-
-
-  }
+  function addTask(task) {
+    setTasks([...tasks, { ...task, id: index }]);
+  };
 
   function deleteTask(id) {
     const filterTasks = tasks.filter(task => task.id !== id)
     setTasks([...filterTasks]);
-  }
+  };
+
+  function cancelTask() {
+    setTask({ id: 0 });
+  };
 
   function editTask(id) {
-    const task = tasks.filter(task => task.id === id)
-    setTask([task[0]]);
-  }
+    const task = tasks.filter(task => task.id === id);
+
+    setTask(task[0]);
+  };
+  function updateTask(task) {
+    setTasks(tasks.map(item => item.id === task.id ? task : item));
+    setTask({ id: 0 })
+  };
 
 
 
@@ -61,7 +42,9 @@ function App() {
     <>
       <TaskForm
         addTask={addTask}
-        selectedTask={task} 
+        updateTask={updateTask}
+        cancelTask={cancelTask}
+        selectedTask={task}
         tasks={tasks} />
 
       <TaskList
