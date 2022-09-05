@@ -58,8 +58,8 @@ export default function Task(props) {
         </p>
 
         <div className="d-flex justify-content-end pt-2 m-0 border-top">
-          <button className="btn btn-outline-primary me-2 btn-sm" >
-            <i className="fas fa-pen me-2" onClick={() => props.editTask(props.task.id)} />
+          <button className="btn btn-outline-primary me-2 btn-sm" onClick={() => props.editTask(props.task.id)}>
+            <i className="fas fa-pen me-2"  />
             edit
           </button>
           <button className="btn btn-outline-danger me-2 btn-sm" onClick={() => props.deleteTask(props.task.id)}>
