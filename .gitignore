@@ -3,3 +3,5 @@
 ################################################################################
 
 /protasks.Interface/.vs
+/protasks.Interface/bin/Debug/net6.0
+/protasks.Interface/obj
