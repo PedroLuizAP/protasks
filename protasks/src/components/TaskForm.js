@@ -8,7 +8,6 @@ const initialTask = {
 }
 
 export default function TaskForm(props) {
-
     const [task, setTask] = useState(thisTask());
 
     useEffect(() => {
@@ -19,7 +18,7 @@ export default function TaskForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (props.selectedTask.id !== undefined && props.selectTask?.id !== 0)
+        if (props.selectedTask?.id !== 0)
             props.updateTask(task);
         else
             props.addTask(task);
@@ -35,7 +34,7 @@ export default function TaskForm(props) {
     const cancelTask = (e) => {
         e.preventDefault();
 
-        props.cancelTasks();
+        props.cancelTask();
 
         setTask(initialTask);
     };
@@ -80,13 +79,13 @@ export default function TaskForm(props) {
 
                 <div className="col-12 mt-0" >
                     {
-                        task?.id === 0 ?
+                        task?.id === 0 ? (
                             <button className="btn btn-outline-primary" type="submit">
                                 <i className="fas fa-plus me-2"></i>
                                 Task
-                            </button>
+                            </button>)
                             :
-                            <>
+                            (<>
                                 <button className="btn btn-outline-success me-2" type="submit">
                                     <i className="fas fa-floppy-disk me-2"></i>
 
@@ -98,7 +97,7 @@ export default function TaskForm(props) {
                                     Cancel
                                 </button>
 
-                            </>
+                            </>)
                     }
                 </div>
             </form>
