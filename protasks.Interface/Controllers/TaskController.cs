@@ -1,28 +1,36 @@
 using Microsoft.AspNetCore.Mvc;
+using protasks.Interface.Models;
 namespace protasks.Interface.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class TaskController : ControllerBase
     {
-        [HttpGet]
-        public void Get()
+        [HttpGet("{id}")]
+        public TaskModel Get(int id)
         {
+            return new();
         }
-        [HttpPut]
+        [HttpPut("{id}")]
 
-        public void Put()
+        public string Put(int id, TaskModel task)
         {
+            return $"My api PUT - {id}";
+
         }
-        [HttpPost]
+        [HttpPost("{id}")]
 
-        public void Post()
+        public string Post(int id)
         {
+            return $"My api POST - {id}";
+
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
 
-        public void Delete()
+        public string Delete(int id)
         {
+            return $"My api DELETE - {id}";
+
         }
     }
 }
