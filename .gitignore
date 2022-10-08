@@ -5,3 +5,6 @@
 /protasks.Interface/.vs
 /protasks.Interface/bin/Debug/net6.0
 /protasks.Interface/obj
+*.db
+/protasks.Interface/ProTask.db-shm
+/protasks.Interface/ProTask.db-wal
