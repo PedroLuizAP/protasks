@@ -20,6 +20,12 @@ namespace protasks.Interface.Controllers
         {
             return _context.Tasks.FirstOrDefault(t => t.Id == id);
         }
+        
+        [HttpGet("All")]
+        public IEnumerable<TaskModel> GetAll()
+        {
+            return _context.Tasks;
+        }
         [HttpPut("{id}")]
 
         public TaskModel? Put(int id, TaskModel task)
