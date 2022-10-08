@@ -1,36 +1,59 @@
 using Microsoft.AspNetCore.Mvc;
+using protasks.Interface.Data;
 using protasks.Interface.Models;
+using System.Threading.Tasks;
+
 namespace protasks.Interface.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class TaskController : ControllerBase
     {
-        [HttpGet("{id}")]
-        public TaskModel Get(int id)
+        private DataContext _context { get; }
+
+        public TaskController(DataContext context)
         {
-            return new();
+            _context = context;
+        }
+        [HttpGet("{id}")]
+        public TaskModel? Get(int id)
+        {
+            return _context.Tasks.FirstOrDefault(t => t.Id == id);
         }
         [HttpPut("{id}")]
 
-        public string Put(int id, TaskModel task)
+        public TaskModel? Put(int id, TaskModel task)
         {
-            return $"My api PUT - {id}";
+            if (task.Id != id) throw new Exception("Id Error");
 
+            _context.Update(task);
+
+            if (_context.SaveChanges() == 0) throw new Exception("Save Error");
+
+            return _context.Tasks.FirstOrDefault(t => t.Id == id);
         }
-        [HttpPost("{id}")]
+        [HttpPost]
 
-        public string Post(int id)
+        public IEnumerable<TaskModel> Post(TaskModel task)
         {
-            return $"My api POST - {id}";
+            _context.Tasks.Add(task);
+
+            if (_context.SaveChanges() == 0) throw new Exception("Save Error");
+
+            return _context.Tasks;
 
         }
         [HttpDelete("{id}")]
 
-        public string Delete(int id)
+        public bool Delete(int id)
         {
-            return $"My api DELETE - {id}";
+            var deleteTask = _context.Tasks.FirstOrDefault(t => t.Id == id);
 
+            if (deleteTask == null) throw new Exception("Delete Error");
+
+            _context.Remove(deleteTask);
+
+            return _context.SaveChanges() > 0;
         }
     }
 }

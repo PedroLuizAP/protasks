@@ -1,4 +1,6 @@
-﻿namespace protasks.Interface.Models
+﻿using protasks.Interface.Data;
+
+namespace protasks.Interface.Models
 {
     public class TaskModel
     {
@@ -6,6 +8,6 @@
 
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Priority { get; set; }
+        public Priority Priority { get; set; }
     }
 }
