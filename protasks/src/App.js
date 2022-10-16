@@ -3,19 +3,30 @@ import { useState } from "react";
 import { useEffect } from "react";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
+import api from "./api/taks";
 
 function App() {
-  const [index, setIndex] = useState(0);
+  const [index] = useState(0);
   const [tasks, setTasks] = useState([]);
-  const [task, setTask] = useState({id:0});
+  const [task, setTask] = useState({ id: 0 });
+
+  const GetAllTasks = async () => {
+    const response = await api.get('task/All');
+    return response.data;
+  }
+
 
   useEffect(() => {
-    tasks.length <= 0 ? setIndex(1) : setIndex(Math.max.apply(Math, tasks.map((t) => t.id)) + 1)
-  }, [tasks]);
+    const getTasks = async () =>{
+      const allTasks = await GetAllTasks();
+      if (allTasks) setTasks(allTasks);
+    };
+    getTasks();
+  }, []);
 
   function addTask(task) {
     setTasks([...tasks, { ...task, id: index }]);
-}
+  }
 
   function deleteTask(id) {
     const filterTasks = tasks.filter(task => task.id !== id)
