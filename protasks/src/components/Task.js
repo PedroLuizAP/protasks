@@ -4,14 +4,10 @@ export default function Task(props) {
 
   function priorityLabel(param) {
     switch (param) {
-      case "1":
-        return "Low";
-
-      case "2":
-        return "Normal";
-
-      case "3":
-        return "High";
+      case "Low":
+      case "Normal":
+      case "High":
+        return param;
 
       default:
         return "Not definied";
@@ -21,13 +17,13 @@ export default function Task(props) {
   function priorityStyle(param, icon) {
     switch (param) {
 
-      case "1":
+      case "Low":
         return icon ? "smile" : "success";
 
-      case "2":
+      case "Normal":
         return icon ? "meh" : "warning";
 
-      case "3":
+      case "High":
         return icon ? "frown" : "danger";
 
       default:
@@ -59,7 +55,7 @@ export default function Task(props) {
 
         <div className="d-flex justify-content-end pt-2 m-0 border-top">
           <button className="btn btn-outline-primary me-2 btn-sm" onClick={() => props.editTask(props.task.id)}>
-            <i className="fas fa-pen me-2"  />
+            <i className="fas fa-pen me-2" />
             edit
           </button>
           <button className="btn btn-outline-danger me-2 btn-sm" onClick={() => props.deleteTask(props.task.id)}>

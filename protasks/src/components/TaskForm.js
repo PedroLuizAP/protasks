@@ -60,10 +60,10 @@ export default function TaskForm(props) {
                 <div className="col-md-6">
                     <label className="form-label">Priority</label>
                     <select id="priority" className="form-select" name="priority" value={task.priority} onChange={inputTextHandler}>
-                        <option defaultValue="0">Select...</option>
-                        <option value="1">Low</option>
-                        <option value="2">Normal</option>
-                        <option value="3">High</option>
+                        <option defaultValue="Not definied">Select...</option>
+                        <option value="Low">Low</option>
+                        <option value="Normal">Normal</option>
+                        <option value="High">High</option>
                     </select>
 
                 </div>
