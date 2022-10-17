@@ -30,7 +30,7 @@ function App() {
 
   const deleteTask = async (id) => {
     if (await api.delete(`task/${id}`)) {
-      const filterTasks = tasks.filter(task => task.id !== id)
+      const filterTasks = tasks.filter(task => task.id !== id);
       setTasks([...filterTasks]);
     }
   };
@@ -44,8 +44,12 @@ function App() {
 
     setTask(task[0]);
   };
-  function updateTask(task) {
-    setTasks(tasks.map(item => item.id === task.id ? task : item));
+  const updateTask = async (task) => {
+    const response = await api.put(`task/${task.id}`, task);
+
+    const {id} = response.data;
+
+    setTasks(tasks.map((item) => item.id === id ? task : item));
     setTask({ id: 0 })
   };
 
