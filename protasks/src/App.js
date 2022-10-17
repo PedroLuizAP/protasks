@@ -16,7 +16,7 @@ function App() {
 
 
   useEffect(() => {
-    const getTasks = async () =>{
+    const getTasks = async () => {
       const allTasks = await GetAllTasks();
       if (allTasks) setTasks(allTasks);
     };
@@ -28,9 +28,11 @@ function App() {
     setTasks([...tasks, response.data]);
   }
 
-  function deleteTask(id) {
-    const filterTasks = tasks.filter(task => task.id !== id)
-    setTasks([...filterTasks]);
+  const deleteTask = async (id) => {
+    if (await api.delete(`task/${id}`)) {
+      const filterTasks = tasks.filter(task => task.id !== id)
+      setTasks([...filterTasks]);
+    }
   };
 
   function cancelTask() {
