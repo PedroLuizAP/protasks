@@ -40,13 +40,13 @@ namespace protasks.Interface.Controllers
         }
         [HttpPost]
 
-        public IEnumerable<TaskModel> Post(TaskModel task)
+        public TaskModel Post(TaskModel task)
         {
             _context.Tasks.Add(task);
 
             if (_context.SaveChanges() == 0) throw new Exception("Save Error");
 
-            return _context.Tasks;
+            return task;
 
         }
         [HttpDelete("{id}")]
