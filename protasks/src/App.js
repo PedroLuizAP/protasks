@@ -6,7 +6,6 @@ import TaskList from "./components/TaskList";
 import api from "./api/taks";
 
 function App() {
-  const [index] = useState(0);
   const [tasks, setTasks] = useState([]);
   const [task, setTask] = useState({ id: 0 });
 
@@ -24,8 +23,9 @@ function App() {
     getTasks();
   }, []);
 
-  function addTask(task) {
-    setTasks([...tasks, { ...task, id: index }]);
+  const addTask = async (task) => {
+    const response = await api.post("task", task);
+    setTasks([...tasks, response.data]);
   }
 
   function deleteTask(id) {
