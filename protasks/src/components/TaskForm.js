@@ -48,9 +48,7 @@ export default function TaskForm(props) {
 
     return (
         <>
-            <h1>
-                Tasks {task.id !== 0 ? task.id : ""}
-            </h1>
+            
             <form className="row g-3" onSubmit={handleSubmit}>
                 <div className="col-md-6">
                     <label className="form-label">Title</label>
@@ -80,9 +78,9 @@ export default function TaskForm(props) {
                 <div className="col-12 mt-0" >
                     {
                         task?.id === 0 ? (
-                            <button className="btn btn-outline-primary" type="submit">
+                            <button className="btn btn-outline-success" type="submit">
                                 <i className="fas fa-plus me-2"></i>
-                                Task
+                                Save
                             </button>)
                             :
                             (<>
