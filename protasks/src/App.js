@@ -8,8 +8,10 @@ import { Button, Modal } from "react-bootstrap"
 
 function App() {
   const [ShowTaskModal, setShowTaskModal] = useState(false);
+  const [smShowConfirmModal, setSmShowConfirmModal] = useState(false);
 
   const handleTaskModal = () => setShowTaskModal(!ShowTaskModal);
+  const handleConfirmModal = () => setSmShowConfirmModal(!smShowConfirmModal);
 
   const [tasks, setTasks] = useState([]);
   const [task, setTask] = useState({ id: 0 });
@@ -19,10 +21,10 @@ function App() {
     return response.data;
   }
 
-const newTask = () =>{
-  setTask({ id: 0 });
-  handleTaskModal();
-}
+  const newTask = () => {
+    setTask({ id: 0 });
+    handleTaskModal();
+  }
 
   useEffect(() => {
     const getTasks = async () => {
@@ -81,8 +83,8 @@ const newTask = () =>{
 
       <TaskList
         tasks={tasks}
-        deleteTask={deleteTask}
-        editTask={editTask} />
+        editTask={editTask} 
+        handleConfirmModal={handleConfirmModal}/>
 
 
       <Modal show={ShowTaskModal} onHide={handleTaskModal}>
@@ -97,6 +99,23 @@ const newTask = () =>{
             selectedTask={task}
             tasks={tasks} />
         </Modal.Body>
+      </Modal>
+
+      <Modal show={smShowConfirmModal} onHide={handleConfirmModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Task</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Do you really want to delete the task - {task.id}?
+        </Modal.Body>
+        <Modal.Footer className="d-flex justify-content-between">
+          <button className="btn btn-outline-success me-2" onClick={() => deleteTask}> Confirm{' '}
+            <i className="fas fa-check me-2" />
+          </button>
+          <button className="btn btn-outline-danger me-2" onClick={() => handleConfirmModal}> Cancel{" "}
+            <i className="fas fa-times me-2" />
+          </button>
+        </Modal.Footer>
       </Modal>
 
     </>
