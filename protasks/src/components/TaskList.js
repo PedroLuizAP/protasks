@@ -9,7 +9,7 @@ export default function TaskList(props) {
                 <Task
                     key={task.id}
                     task={task}
-                    deleteTask={props.handleConfirmModal}
+                    handleConfirmModal={props.handleConfirmModal}
                     editTask={props.editTask} />
             ))}
         </div>

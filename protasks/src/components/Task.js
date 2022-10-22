@@ -58,7 +58,7 @@ export default function Task(props) {
             <i className="fas fa-pen me-2" />
             edit
           </button>
-          <button className="btn btn-outline-danger me-2 btn-sm" onClick={() => props.deleteTask(props.task.id)}>
+          <button className="btn btn-outline-danger me-2 btn-sm" onClick={() => props.handleConfirmModal(props.task.id)}>
             <i className="fas fa-trash me-2" />
             delete
           </button>
