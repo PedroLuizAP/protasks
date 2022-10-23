@@ -1,5 +1,3 @@
-In the project directory, you can run:
-
 ### `dotnet add package Microsoft.EntityFrameworkCore`
 ### `dotnet add package Microsoft.EntityFrameworkCore.Tools`
 ### `dotnet add package Microsoft.EntityFrameworkCore.Desing`
