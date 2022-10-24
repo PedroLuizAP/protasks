@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using protasks.Interface.Data;
-using protasks.Interface.Models;
-using System.Threading.Tasks;
+using protasks.Data.Context;
+using protasks.Domain.Entities;
 
 namespace protasks.Interface.Controllers
 {

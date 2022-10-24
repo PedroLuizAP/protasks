@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using protasks.Interface.Data;
+using protasks.Data.Context;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
