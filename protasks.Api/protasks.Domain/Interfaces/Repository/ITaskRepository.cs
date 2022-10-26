@@ -2,10 +2,10 @@
 
 namespace protasks.Domain.Interfaces.Repository
 {
-    public interface ITaskRepository
+    public interface ITaskRepository : IGeneralRepository
     {
         Task<TaskModel[]> GetAllAsync();
-        Task<TaskModel> GetByIdAsync();
-        Task<TaskModel> GetByTitleAsync();
+        Task<TaskModel> GetByIdAsync(long id);
+        Task<TaskModel> GetByTitleAsync(string title);
     }
 }
