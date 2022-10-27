@@ -1,6 +1,6 @@
 ﻿namespace protasks.Domain.Interfaces.Repository
 {
-    public interface IGeneralRepository
+    public interface IBaseRepository
     {
         void Add<T>(T entity) where T : class;
         void Update<T>(T entity) where T : class;
