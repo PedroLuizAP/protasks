@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using protasks.Data.Context;
 using protasks.Domain.Entities;
+using protasks.Domain.Interfaces.Services;
 
 namespace protasks.Interface.Controllers
 {
@@ -8,57 +8,56 @@ namespace protasks.Interface.Controllers
     [Route("api/[controller]")]
     public class TaskController : ControllerBase
     {
-        private DataContext _context { get; }
+        private readonly ITaskService _taskService;
+        public TaskController(ITaskService taskService)
+        {
+            _taskService = taskService;
+        }
 
-        public TaskController(DataContext context)
-        {
-            _context = context;
-        }
         [HttpGet("{id}")]
-        public TaskModel? Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return _context.Tasks.FirstOrDefault(t => t.Id == id);
+            var task = await _taskService.GetTaskByIdAsync(id);
+
+            if (task == null) return NoContent();
+
+            return Ok(task);
         }
-        
+
         [HttpGet("All")]
-        public IEnumerable<TaskModel> GetAll()
+        public async Task<IActionResult> GetAllAsync()
         {
-            return _context.Tasks;
+            var tasks = await _taskService.GetAllTasksAsync();
+
+            if (tasks == null) return NoContent();
+
+            return Ok(tasks);
         }
         [HttpPut("{id}")]
 
-        public TaskModel? Put(int id, TaskModel task)
+        public async Task<IActionResult> Put(int id, TaskModel task)
         {
-            if (task.Id != id) throw new Exception("Id Error");
+            if (task.Id != id) Conflict("please submit a valid Task");
 
-            _context.Update(task);
+            var newTask = await _taskService.UpdateTask(task);
 
-            if (_context.SaveChanges() == 0) throw new Exception("Save Error");
-
-            return _context.Tasks.FirstOrDefault(t => t.Id == id);
+            return Ok(newTask);
         }
         [HttpPost]
 
-        public TaskModel Post(TaskModel task)
+        public async Task<IActionResult> PostAsync(TaskModel task)
         {
-            _context.Tasks.Add(task);
+            var newTask = await _taskService.AddTask(task);
 
-            if (_context.SaveChanges() == 0) throw new Exception("Save Error");
-
-            return task;
-
+            return Created($"/{task.Id}", newTask);
         }
         [HttpDelete("{id}")]
 
-        public bool Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var deleteTask = _context.Tasks.FirstOrDefault(t => t.Id == id);
-
-            if (deleteTask == null) throw new Exception("Delete Error");
-
-            _context.Remove(deleteTask);
-
-            return _context.SaveChanges() > 0;
+            if (await _taskService.DeleteTask(id)) return Accepted(); 
+            
+            return UnprocessableEntity();
         }
     }
 }
