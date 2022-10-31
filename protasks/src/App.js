@@ -1,8 +1,8 @@
 import "./App.css";
 import { useState } from "react";
 import { useEffect } from "react";
-import TaskForm from "./components/TaskForm";
-import TaskList from "./components/TaskList";
+import TaskForm from "./pages/tasks/TaskForm";
+import TaskList from "./pages/tasks/TaskList";
 import api from "./api/taks";
 import { Button, Modal } from "react-bootstrap"
 
