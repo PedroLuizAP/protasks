@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import TaskForm from "./pages/tasks/TaskForm";
 import TaskList from "./pages/tasks/TaskList";
 import api from "./api/taks";
-import { Button, Modal } from "react-bootstrap"
+import { Button, Modal } from "react-bootstrap";
 
 function App() {
   const [ShowTaskModal, setShowTaskModal] = useState(false);
