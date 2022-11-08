@@ -2,7 +2,7 @@ import Task from "./pages/tasks/Task";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import Custumer from './pages/custumer/Custumer';
-import Dashboard from "./pages/dashboard/dashboard";
+import Dashboard from "./pages/dashboard/Dashboard";
 function App() {
   return (
     <Switch>
