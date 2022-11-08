@@ -1,70 +1,132 @@
-import React from 'react'
+import {useState} from "react";
+import {useEffect} from "react";
+import api from "../../api/taks";
+import {Button, Modal} from "react-bootstrap";
+import TaskList from './TaskList';
+import TaskForm from './TaskForm';
+import TitlePage from './../../components/TitlePage';
 
-export default function Task(props) {
+export default function Task() {
+  const [ShowTaskModal, setShowTaskModal] = useState(false);
+  const [smShowConfirmModal, setSmShowConfirmModal] = useState(false);
 
-  function priorityLabel(param) {
-    switch (param) {
-      case "Low":
-      case "Normal":
-      case "High":
-        return param;
-
-      default:
-        return "Not definied";
+  const handleTaskModal = () => setShowTaskModal(!ShowTaskModal);
+  const handleConfirmModal = (id) => {
+    if (id !== undefined && id !== 0) {
+      const task = tasks.filter((task) => task.id === id);
+      setTask(task[0]);
+    } else {
+      setTask({id: 0});
     }
-  }
+    setSmShowConfirmModal(!smShowConfirmModal);
+  };
 
-  function priorityStyle(param, icon) {
-    switch (param) {
+  const [tasks, setTasks] = useState([]);
+  const [task, setTask] = useState({id: 0});
 
-      case "Low":
-        return icon ? "smile" : "success";
+  const GetAllTasks = async () => {
+    const response = await api.get("task/All");
+    return response.data;
+  };
 
-      case "Normal":
-        return icon ? "meh" : "warning";
+  const newTask = () => {
+    setTask({id: 0});
+    handleTaskModal();
+  };
 
-      case "High":
-        return icon ? "frown" : "danger";
+  useEffect(() => {
+    const getTasks = async () => {
+      const allTasks = await GetAllTasks();
+      if (allTasks) setTasks(allTasks);
+    };
+    getTasks();
+  }, []);
 
-      default:
-        return icon ? "circle" : "";
+  const addTask = async (task) => {
+    handleTaskModal();
+    const response = await api.post("task", task);
+    setTasks([...tasks, response.data]);
+  };
+
+  const deleteTask = async (id) => {
+    if (await api.delete(`task/${id}`)) {
+      const filterTasks = tasks.filter((task) => task.id !== id);
+      setTasks([...filterTasks]);
     }
-  }
+    handleConfirmModal(0);
+  };
+
+  const cancelTask = () => {
+    setTask({id: 0});
+    handleTaskModal();
+  };
+
+  const editTask = (id) => {
+    const task = tasks.filter((task) => task.id === id);
+    setTask(task[0]);
+    handleTaskModal();
+  };
+  const updateTask = async (task) => {
+    handleTaskModal();
+    const response = await api.put(`task/${task.id}`, task);
+
+    const {id} = response.data;
+
+    setTasks(tasks.map((item) => (item.id === id ? task : item)));
+    setTask({id: 0});
+  };
 
   return (
-    <div key={props.task.id} className={"card mb-2 shadow-sm border-" + priorityStyle(props.task.priority, false)}>
-      <div className="card-body">
-        <div className="d-flex justify-content-between">
-          <h5 className="card-title">
-            <span className="badge bg-secondary me-1">
-              {props.task.id}
-            </span>
-            - {props.task.title}
-          </h5>
-          <h6>
-            priority:
-            <span className={"ms-1 text-" + priorityStyle(props.task.priority, false)}>
-              <i className={"me-1 far fa-" + priorityStyle(props.task.priority, true)} />
-              {priorityLabel(props.task.priority)}
-            </span>
-          </h6>
-        </div>
-        <p key={props.task.id} className="card-text">
-          {props.task.id}-{props.task.description}
-        </p>
+    <>
+      <TitlePage title={"Tasks" + (task.id !== 0 ? task.id : "")}>
+        <Button variant="outline-secondary" onClick={newTask}>
+          <i className="fas fa-plus"></i>
+        </Button>
+      </TitlePage>
 
-        <div className="d-flex justify-content-end pt-2 m-0 border-top">
-          <button className="btn btn-outline-primary me-2 btn-sm" onClick={() => props.editTask(props.task.id)}>
-            <i className="fas fa-pen me-2" />
-            edit
+      <TaskList
+        tasks={tasks}
+        editTask={editTask}
+        handleConfirmModal={handleConfirmModal}
+      />
+
+      <Modal show={ShowTaskModal} onHide={handleTaskModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Task {task.id > 0 ? -task.id : ""}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <TaskForm
+            addTask={addTask}
+            updateTask={updateTask}
+            cancelTask={cancelTask}
+            selectedTask={task}
+            tasks={tasks}
+          />
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={smShowConfirmModal} onHide={handleConfirmModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Task</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Do you really want to delete the task - {task.id}?
+        </Modal.Body>
+        <Modal.Footer className="d-flex justify-content-between">
+          <button
+            className="btn btn-outline-success me-2"
+            onClick={() => deleteTask(task.id)}>
+            {" "}
+            Confirm <i className="fas fa-check me-2" />
           </button>
-          <button className="btn btn-outline-danger me-2 btn-sm" onClick={() => props.handleConfirmModal(props.task.id)}>
-            <i className="fas fa-trash me-2" />
-            delete
+          <button
+            className="btn btn-outline-danger me-2"
+            onClick={() => handleConfirmModal(0)}>
+            {" "}
+            Cancel <i className="fas fa-times me-2" />
           </button>
-        </div>
-      </div>
-    </div>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }
-
