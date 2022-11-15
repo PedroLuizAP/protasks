@@ -1,7 +1,10 @@
 import React from "react";
 import TitlePage from "../../components/TitlePage";
+import {InputGroup, Form} from "react-bootstrap";
+import {useState} from "react";
 
-const custumer = [
+
+const custumers = [
   {
     id: 1,
     name: "Enterprise",
@@ -16,35 +19,68 @@ const custumer = [
     contact: "123456",
     situation: "active",
   },
+  {
+    id: 3,
+    name: "Enterprise23",
+    responsible: "Luiz3",
+    contact: "1234563",
+    situation: "acti3e",
+  },
 ];
 export default function CustumerList() {
+  const [findTherm, setFindTherm] = useState("");
+  const handleInputChange = (e) =>{
+    setFindTherm(e.target.value)
+  };
+
+  const filterCustumers = custumers.filter((custumer) =>{
+    return (Object.values(custumer).join(" ").toUpperCase().includes(findTherm.toUpperCase()));
+  });
+
   return (
     <>
       <TitlePage title="Custumer List" />
+
+      <InputGroup className="mb-3 mt-3">
+        <InputGroup.Text >
+          Find:
+        </InputGroup.Text>
+        <Form.Control placeholder="Find by name" onChange={handleInputChange}/>
+      </InputGroup>
+
       <table className="table table-striped table-hover">
         <thead className="table-dark mt-3">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Name</th>
+            <th scope="col">Responsible</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Situation</th>
+            <th scope="col">Options</th>
           </tr>
         </thead>
         <tbody>
-          {custumer.map((c) => {
-            <tr key={c.id}>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+          {filterCustumers.map((custumer) => (
+            <tr key={custumer.id}>
+              <td>{custumer.id}</td>
+              <td>{custumer.name}</td>
+              <td>{custumer.responsible}</td>
+              <td>{custumer.contact}</td>
+              <td>{custumer.situation}</td>
               <td>
                 <div>
-                  
+                  <button className="btn btn-sm btn-outline-primary me-2">
+                    <i className="fas fa-user-edit me-2" />
+                    Edit
+                  </button>
+                  <button className="btn btn-sm btn-outline-danger me-2">
+                    <i className="fas fa-user-times me-2" />
+                    Inactivate
+                  </button>
                 </div>
               </td>
-            </tr>;
-          })}
+            </tr>
+          ))}
         </tbody>
       </table>
     </>
