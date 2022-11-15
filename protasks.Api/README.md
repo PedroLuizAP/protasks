@@ -8,7 +8,7 @@ Add the dependencies
 ### `dotnet ef database update`
 
 Run the command to create the database.
-if you have any error make sure the dependencies are properly installed.
+if you have any error make sure the dependencies are properly installed or if you selected the correct project.
 
 ### `dotnet run`
 
