@@ -1,7 +1,8 @@
 import React from "react";
 import TitlePage from "../../components/TitlePage";
-import {InputGroup, Form} from "react-bootstrap";
+import {InputGroup, Form, Button} from "react-bootstrap";
 import {useState} from "react";
+import {useHistory} from "react-router-dom";
 
 
 const custumers = [
@@ -28,6 +29,7 @@ const custumers = [
   },
 ];
 export default function CustumerList() {
+  const history = useHistory();
   const [findTherm, setFindTherm] = useState("");
   const handleInputChange = (e) =>{
     setFindTherm(e.target.value)
@@ -37,9 +39,18 @@ export default function CustumerList() {
     return (Object.values(custumer).join(" ").toUpperCase().includes(findTherm.toUpperCase()));
   });
 
+  const newCustumer = () =>{
+    history.push("/custumer/detail");
+  };
+
   return (
     <>
-      <TitlePage title="Custumer List" />
+      <TitlePage title="Custumer List" >
+        <Button variant="outline-secondary" onClick={newCustumer}>
+          <i className="fas fa-plus me-2"/>
+          New Custumer
+        </Button>
+      </TitlePage>
 
       <InputGroup className="mb-3 mt-3">
         <InputGroup.Text >
@@ -69,7 +80,7 @@ export default function CustumerList() {
               <td>{custumer.situation}</td>
               <td>
                 <div>
-                  <button className="btn btn-sm btn-outline-primary me-2">
+                  <button className="btn btn-sm btn-outline-primary me-2" onClick={() => history.push( `/custurmer/detail/${custumer.id}`)}>
                     <i className="fas fa-user-edit me-2" />
                     Edit
                   </button>
