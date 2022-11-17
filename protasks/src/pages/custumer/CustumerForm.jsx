@@ -1,15 +1,15 @@
 import React from 'react'
 import { Button } from 'react-bootstrap';
 import TitlePage from './../../components/TitlePage';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function CustumerForm() {
-  let history = useHistory();
+  let navigate = useNavigate();
   let {id} = useParams();
   return (
     <>
     <TitlePage title={"Custumer Detail " + (id !== undefined ? id : "")} >
-      <Button variant='outline-secondary' onClick={() => history.goBack()}>
+      <Button variant='outline-secondary' onClick={() => navigate(-1)}>
         <i className='fas fa-arrow-left me-2'/>
         Return
       </Button>

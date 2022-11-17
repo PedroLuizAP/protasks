@@ -2,7 +2,7 @@ import React from "react";
 import TitlePage from "../../components/TitlePage";
 import {InputGroup, Form, Button} from "react-bootstrap";
 import {useState} from "react";
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 const custumers = [
@@ -29,7 +29,7 @@ const custumers = [
   },
 ];
 export default function CustumerList() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [findTherm, setFindTherm] = useState("");
   const handleInputChange = (e) =>{
     setFindTherm(e.target.value)
@@ -40,7 +40,7 @@ export default function CustumerList() {
   });
 
   const newCustumer = () =>{
-    history.push("/custumer/detail");
+    navigate("/custumer/detail");
   };
 
   return (
@@ -80,7 +80,7 @@ export default function CustumerList() {
               <td>{custumer.situation}</td>
               <td>
                 <div>
-                  <button className="btn btn-sm btn-outline-primary me-2" onClick={() => history.push( `/custurmer/detail/${custumer.id}`)}>
+                  <button className="btn btn-sm btn-outline-primary me-2" onClick={() => navigate( `/custurmer/detail/${custumer.id}`)}>
                     <i className="fas fa-user-edit me-2" />
                     Edit
                   </button>
