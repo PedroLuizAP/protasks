@@ -11,10 +11,10 @@ export default function Menu() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link activeClassName="active" as={NavLink} to="/custumer/list">
+            <Nav.Link className={(navData) => navData.isActive ? "Active" : ""} as={NavLink} to="/custumer/list">
               Custumoer
             </Nav.Link>
-            <Nav.Link activeClassName="active" as={NavLink} to="/tasks/list">
+            <Nav.Link className={(navData) => navData.isActive ? "Active" : ""} as={NavLink} to="/tasks/list">
               Tasks
             </Nav.Link>
           </Nav>
