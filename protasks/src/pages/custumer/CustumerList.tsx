@@ -28,10 +28,11 @@ const custumers = [
     situation: "acti3e",
   },
 ];
-export default function CustumerList() {
+
+const CustumerList = () => {
   const navigate = useNavigate();
   const [findTherm, setFindTherm] = useState("");
-  const handleInputChange = (e) =>{
+  const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>) =>{
     setFindTherm(e.target.value)
   };
 
@@ -97,3 +98,4 @@ export default function CustumerList() {
     </>
   );
 }
+export default CustumerList;

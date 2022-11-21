@@ -1,6 +1,8 @@
 import React from "react";
 import CustumerList from "./CustumerList";
 
-export default function Custumer() {
+const Custumer: React.FC = () => {
   return <CustumerList />;
 }
+
+export default Custumer;
