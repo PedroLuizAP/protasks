@@ -7,7 +7,7 @@ import CustumerForm from './pages/custumer/CustumerForm';
 import PageNotFound from './pages/dashboard/PageNotFound';
 import React from "react";
 
-const App = () => {
+const App: React.FC  = () => {
   return (
     <Routes>
       <Route path="/" element={<Dashboard/>} />
