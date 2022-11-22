@@ -1,28 +1,38 @@
-import {useState} from "react";
-import {useEffect} from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import api from "../../api/taks";
-import {Button, Modal} from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import TaskList from './TaskList';
 import TaskForm from './TaskForm';
-import TitlePage from './../../components/TitlePage';
+import TitlePage from '../../components/TitlePage';
+import { ITask, Priority } from './../../model/task';
 
-export default function Task() {
+const initialTask: ITask = {
+  id: 0,
+  title: "",
+  priority: Priority.Notdefinied,
+  description: ""
+}
+
+const Task = () => {
   const [ShowTaskModal, setShowTaskModal] = useState(false);
   const [smShowConfirmModal, setSmShowConfirmModal] = useState(false);
 
+  const [tasks, setTasks] = useState<ITask[]>([]);
+  const [task, setTask] = useState<ITask>(initialTask);
+
   const handleTaskModal = () => setShowTaskModal(!ShowTaskModal);
-  const handleConfirmModal = (id) => {
+
+  const handleConfirmModal = (id?: number) => {
     if (id !== undefined && id !== 0) {
       const task = tasks.filter((task) => task.id === id);
       setTask(task[0]);
     } else {
-      setTask({id: 0});
+      setTask(initialTask);
     }
     setSmShowConfirmModal(!smShowConfirmModal);
   };
 
-  const [tasks, setTasks] = useState([]);
-  const [task, setTask] = useState({id: 0});
 
   const GetAllTasks = async () => {
     const response = await api.get("task/All");
@@ -30,7 +40,7 @@ export default function Task() {
   };
 
   const newTask = () => {
-    setTask({id: 0});
+    setTask(initialTask);
     handleTaskModal();
   };
 
@@ -42,13 +52,13 @@ export default function Task() {
     getTasks();
   }, []);
 
-  const addTask = async (task) => {
+  const addTask = async (task: ITask) => {
     handleTaskModal();
     const response = await api.post("task", task);
     setTasks([...tasks, response.data]);
   };
 
-  const deleteTask = async (id) => {
+  const deleteTask = async (id: number) => {
     if (await api.delete(`task/${id}`)) {
       const filterTasks = tasks.filter((task) => task.id !== id);
       setTasks([...filterTasks]);
@@ -57,23 +67,23 @@ export default function Task() {
   };
 
   const cancelTask = () => {
-    setTask({id: 0});
+    setTask(initialTask);
     handleTaskModal();
   };
 
-  const editTask = (id) => {
+  const editTask = (id?: number) => {
     const task = tasks.filter((task) => task.id === id);
     setTask(task[0]);
     handleTaskModal();
   };
-  const updateTask = async (task) => {
+  const updateTask = async (task: ITask) => {
     handleTaskModal();
     const response = await api.put(`task/${task.id}`, task);
 
-    const {id} = response.data;
+    const { id } = response.data;
 
     setTasks(tasks.map((item) => (item.id === id ? task : item)));
-    setTask({id: 0});
+    setTask(initialTask);
   };
 
   return (
@@ -100,12 +110,11 @@ export default function Task() {
             updateTask={updateTask}
             cancelTask={cancelTask}
             selectedTask={task}
-            tasks={tasks}
           />
         </Modal.Body>
       </Modal>
 
-      <Modal show={smShowConfirmModal} onHide={handleConfirmModal}>
+      <Modal show={smShowConfirmModal} onHide={() => handleConfirmModal()}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Task</Modal.Title>
         </Modal.Header>
@@ -130,3 +139,5 @@ export default function Task() {
     </>
   );
 }
+
+export default Task;
