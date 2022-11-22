@@ -1,12 +1,13 @@
-export interface task {
+export interface ITask {
     id: number;
-    priority: string;
+    priority: Priority;
     title: string;
     description: string;
 }
 
-export interface TaskListProps {
-    tasks: task[];
-    editTask: (id: number) => void;
-    handleConfirmModal: (id: number) => void;
+export enum Priority {
+    Notdefinied = "Notdefinied",
+    Low = "Low",
+    Normal = "Normal",
+    High = "High"
 }
