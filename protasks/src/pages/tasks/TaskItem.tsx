@@ -1,17 +1,5 @@
 import React from 'react'
-
-interface task {
-  id: number;
-  priority: string;
-  title: string;
-  description: string;
-}
-
-interface TaskItemProps {
-  task: task;
-  editTask: (id: number) => void;
-  handleConfirmModal: (id: number) => void;
-}
+import { TaskItemProps } from '../../model/tasksProps';
 
 const TaskItem: React.FC<TaskItemProps> = ({ task, editTask, handleConfirmModal }: TaskItemProps) => {
 
