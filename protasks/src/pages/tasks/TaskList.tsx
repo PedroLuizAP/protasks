@@ -1,6 +1,6 @@
 import React from 'react'
 import TaskItem from "./TaskItem";
-import { TaskListProps } from './../../model/task';
+import { TaskListProps } from './../../model/tasksProps';
 
 const TaskList: React.FC<TaskListProps> = ({ tasks, editTask, handleConfirmModal }: TaskListProps) => {
     return (

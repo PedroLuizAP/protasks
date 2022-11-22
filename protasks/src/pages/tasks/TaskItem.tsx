@@ -1,13 +1,14 @@
 import React from 'react'
+import { Priority } from '../../model/task';
 import { TaskItemProps } from '../../model/tasksProps';
 
 const TaskItem: React.FC<TaskItemProps> = ({ task, editTask, handleConfirmModal }: TaskItemProps) => {
 
-  function priorityLabel(param: string) {
+  function priorityLabel(param: Priority) {
     switch (param) {
-      case "Low":
-      case "Normal":
-      case "High":
+      case Priority.Low:
+      case Priority.Normal:
+      case Priority.High:
         return param;
 
       default:
@@ -18,13 +19,13 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, editTask, handleConfirmModal 
   function priorityStyle(param: string, icon: boolean) {
     switch (param) {
 
-      case "Low":
+      case Priority.Low:
         return icon ? "smile" : "success";
 
-      case "Normal":
+      case Priority.Normal:
         return icon ? "meh" : "warning";
 
-      case "High":
+      case Priority.High:
         return icon ? "frown" : "danger";
 
       default:
