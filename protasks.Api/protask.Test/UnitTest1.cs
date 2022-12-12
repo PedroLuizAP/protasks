@@ -1,4 +1,3 @@
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using protasks.Data.Context;
@@ -10,7 +9,6 @@ namespace protask.Test
     public class UnitTest1
     {
         private DbContextOptions<DataContext> _dbContextOptions;
-        private SqliteConnection _connection;
         public UnitTest1()
         {
             _dbContextOptions = new DbContextOptionsBuilder<DataContext>().UseInMemoryDatabase("TaskControllerTest").ConfigureWarnings(b => b.Ignore(InMemoryEventId.TransactionIgnoredWarning)).Options;
