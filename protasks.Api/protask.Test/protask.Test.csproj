@@ -26,4 +26,9 @@
     <ProjectReference Include="..\protasks.Data\protasks.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tests\Repository\" />
+    <Folder Include="Tests\Services\" />
+  </ItemGroup>
+
 </Project>
