@@ -8,9 +8,7 @@ namespace protasks.Domain.Services
     public class TaskService : ITaskService
     {
         private ITaskRepository _taskRepository { get; }
-
         public TaskService(ITaskRepository taskRepository) => _taskRepository = taskRepository;
-
 
         public async Task<TaskModel> AddTask(TaskModel task)
         {
