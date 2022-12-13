@@ -11,7 +11,7 @@ namespace protask.Test.Helpers
 
         internal static void MockContext(this DataContext context)
         {
-            context.Add(new TaskModel { Title = "TesteUnit", Description = "Teste", Priority = Priority.Low });
+            context.Add(new TaskModel { Id = 1, Title = "TesteUnit", Description = "Teste", Priority = Priority.Low });
 
             context.SaveChanges();
         }
