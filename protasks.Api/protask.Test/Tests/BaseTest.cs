@@ -4,17 +4,17 @@ using protasks.Data.Context;
 
 namespace protask.Test.Tests
 {
-    internal abstract class BaseTest
+    public abstract class BaseTest
     {
-        private DbContextOptions<DataContext> _dbContextOptions;
+        private readonly DbContextOptions<DataContext> _dbContextOptions;
         protected DataContext DataContext { get; set; }
-        protected BaseTest()
+        protected BaseTest(bool mock = true)
         {
             _dbContextOptions = ContextHelper.GetOptionsBuilder();
 
             DataContext = new(_dbContextOptions);
 
-            DataContext.MockContext();
+            if (mock) DataContext.MockContext();
         }
     }
 }
