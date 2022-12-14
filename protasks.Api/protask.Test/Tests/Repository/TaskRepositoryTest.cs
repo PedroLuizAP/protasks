@@ -11,7 +11,7 @@ namespace protask.Test.Tests.Repository
 {
     public class TaskRepositoryTest : BaseTest
     {
-        private TaskRepository _taskRepository;
+        private readonly TaskRepository _taskRepository;
         public TaskRepositoryTest() : base()
         {
             _taskRepository = new(DataContext);
@@ -23,6 +23,38 @@ namespace protask.Test.Tests.Repository
             var allTask = await _taskRepository.GetAllAsync();
 
             Assert.NotEmpty(allTask);
+        }
+        
+        [Fact]
+        internal async Task GetByIdAsync_Test_WithResult()
+        {            
+            var allTask = await _taskRepository.GetByIdAsync(1);
+
+            Assert.NotNull(allTask);
+        }
+        
+        [Fact]
+        internal async Task GetByIdAsync_Test_WithoutResult()
+        {            
+            var allTask = await _taskRepository.GetByIdAsync(0);
+
+            Assert.Null(allTask);
+        }
+        
+        [Fact]
+        internal async Task GetByTitleAsync_Test_WithResult()
+        {            
+            var allTask = await _taskRepository.GetByTitleAsync("TesteUnit");
+
+            Assert.NotNull(allTask);
+        }
+        
+        [Fact]
+        internal async Task GetByTitleAsync_Test_WithoutResult()
+        {            
+            var allTask = await _taskRepository.GetByTitleAsync("");
+
+            Assert.Null(allTask);
         }
     }
 }
