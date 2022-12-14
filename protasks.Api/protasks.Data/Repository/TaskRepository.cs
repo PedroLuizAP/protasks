@@ -18,14 +18,14 @@ namespace protasks.Data.Repository
             return await query.AsNoTracking().ToArrayAsync();
         }
 
-        public async Task<TaskModel> GetByIdAsync(long id)
+        public async Task<TaskModel?> GetByIdAsync(long id)
         {
             IQueryable<TaskModel> query = _context.Tasks;
 
             return await query.AsNoTracking().SingleOrDefaultAsync(task => task.Id == id);
         }
 
-        public async Task<TaskModel> GetByTitleAsync(string title)
+        public async Task<TaskModel?> GetByTitleAsync(string title)
         {
             IQueryable<TaskModel> query = _context.Tasks;
 
