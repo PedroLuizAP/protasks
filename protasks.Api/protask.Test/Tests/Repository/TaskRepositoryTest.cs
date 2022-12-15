@@ -25,34 +25,38 @@ namespace protask.Test.Tests.Repository
             Assert.NotEmpty(allTask);
         }
         
-        [Fact]
-        internal async Task GetByIdAsync_Test_WithResult()
+        [Theory]
+        [InlineData(1)]
+        internal async Task GetByIdAsync_Test_WithResult(long id)
         {            
-            var allTask = await _taskRepository.GetByIdAsync(1);
+            var allTask = await _taskRepository.GetByIdAsync(id);
 
             Assert.NotNull(allTask);
         }
         
-        [Fact]
-        internal async Task GetByIdAsync_Test_WithoutResult()
+        [Theory]
+        [InlineData(0)]
+        internal async Task GetByIdAsync_Test_WithoutResult(long id)
         {            
-            var allTask = await _taskRepository.GetByIdAsync(0);
+            var allTask = await _taskRepository.GetByIdAsync(id);
 
             Assert.Null(allTask);
         }
         
-        [Fact]
-        internal async Task GetByTitleAsync_Test_WithResult()
+        [Theory]
+        [InlineData("TesteUnit")]
+        internal async Task GetByTitleAsync_Test_WithResult(string title)
         {            
-            var allTask = await _taskRepository.GetByTitleAsync("TesteUnit");
+            var allTask = await _taskRepository.GetByTitleAsync(title);
 
             Assert.NotNull(allTask);
         }
         
-        [Fact]
-        internal async Task GetByTitleAsync_Test_WithoutResult()
+        [Theory]
+        [InlineData("")]
+        internal async Task GetByTitleAsync_Test_WithoutResult(string title)
         {            
-            var allTask = await _taskRepository.GetByTitleAsync("");
+            var allTask = await _taskRepository.GetByTitleAsync(title);
 
             Assert.Null(allTask);
         }
