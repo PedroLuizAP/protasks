@@ -1,6 +1,6 @@
 ﻿using protask.Test.TestData;
 using protasks.Domain.Entities;
-using System.Collections;
+using System.Xml.Linq;
 
 namespace protask.Test.Tests.Services
 {
@@ -8,16 +8,15 @@ namespace protask.Test.Tests.Services
     {
         public static TaskModel RepeatedTask => new TaskModel() { Title = "TesteUnit" };
 
+        public TaskTestData _data = new();
+
         [Theory]
-        [MemberData(nameof(GetUserChoiceTestData))]
+        [ClassData(typeof(TaskTestData))]
         internal async Task GetAllAsync_Test_NotEmpty(TaskModel task)
         {
 
         }
 
-        public static IEnumerable<object[]> GetUserChoiceTestData()
-        {
-            yield return new object[] { TaskTestData.Current.Choices[0]};
-        }
+
     }
 }
