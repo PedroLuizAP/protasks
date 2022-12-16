@@ -5,22 +5,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace protask.Test.TestData
 {
-    public class TaskTestData
+    public class TaskTestData  : IEnumerable<object[]>
     {
         public static TaskTestData Current { get; } = new TaskTestData();
-        public List<TaskModel> Choices { get; set; }
+        public List<TaskModel> Tasks { get; set; }
 
         public TaskTestData()
         {
-            Choices = new List<TaskModel>
+            Tasks = new List<TaskModel>
             {
                 new TaskModel {  Title="teste"},
                 new TaskModel {  Title = "xUniTest"}
             };
         }
+
+        public IEnumerator<object[]> GetEnumerator()
+        {
+            yield return new object[] { TaskTestData.Current.Tasks[0] };
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     }
 }
