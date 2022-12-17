@@ -1,22 +1,30 @@
 ﻿using protask.Test.TestData.Task;
+using protasks.Data.Repository;
 using protasks.Domain.Entities;
-using System.Xml.Linq;
+using protasks.Domain.Interfaces.Repository;
+using protasks.Domain.Services;
+using protasks.Domain.Resources;
+
 
 namespace protask.Test.Tests.Services
 {
     public class TaskServiceTest : BaseTest
     {
-        public static TaskModel RepeatedTask => new TaskModel() { Title = "TesteUnit" };
-
-        public BaseTaskTestData _data = new();
-
-        [Theory]
-        [ClassData(typeof(BaseTaskTestData))]
-        internal async Task GetAllAsync_Test_NotEmpty(TaskModel task)
+        private readonly TaskService _taskService;
+        public TaskServiceTest()
         {
+            ITaskRepository repo = new TaskRepository(DataContext);
 
+            _taskService = new(repo);
         }
 
+        [Theory]
+        [ClassData(typeof(TitleError))]
+        public async Task AddTask_Test_WithThrow(TaskModel task)
+        {
+            var exception = await Assert.ThrowsAsync<Exception>(() =>  _taskService.AddTask(task));
 
+            Assert.Matches(exception.Message, Messages.RepeatedTitle);
+        }
     }
 }
