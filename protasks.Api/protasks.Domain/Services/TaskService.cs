@@ -1,6 +1,7 @@
 ﻿using protasks.Domain.Entities;
 using protasks.Domain.Interfaces.Repository;
 using protasks.Domain.Interfaces.Services;
+using protasks.Domain.Resources;
 using System.Threading.Tasks;
 
 namespace protasks.Domain.Services
@@ -12,7 +13,7 @@ namespace protasks.Domain.Services
 
         public async Task<TaskModel> AddTask(TaskModel task)
         {
-            if (await _taskRepository.GetByTitleAsync(task.Title) != null) throw new Exception("You have already created a task with this title");
+            if (await _taskRepository.GetByTitleAsync(task.Title) != null) throw new Exception(Messages.RepeatedTitle);
 
             if (await _taskRepository.GetByIdAsync(task.Id) == null)
             {
