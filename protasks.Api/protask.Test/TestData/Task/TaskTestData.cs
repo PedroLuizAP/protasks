@@ -11,21 +11,14 @@ namespace protask.Test.TestData.Task
 {
     public class BaseTaskTestData : IEnumerable<object[]>
     {
-        public static BaseTaskTestData Current { get; } = new BaseTaskTestData();
+        public static BaseTaskTestData Current { get; set; } = new();
         public List<TaskModel> Tasks { get; set; }
 
-        public BaseTaskTestData()
-        {
-            //Tasks = new List<TaskModel>
-            //{
-            //    new TaskModel {  Title="teste"},
-            //    new TaskModel {  Title = "xUniTest"}
-            //};
-        }
+        public BaseTaskTestData() { }
 
         public IEnumerator<object[]> GetEnumerator()
         {
-            yield return new object[] { Current.Tasks[0] };
+            foreach (var task in Current.Tasks) yield return new object[] { task };
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
