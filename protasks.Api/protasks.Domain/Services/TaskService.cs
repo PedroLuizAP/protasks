@@ -22,7 +22,7 @@ namespace protasks.Domain.Services
                 if (await _taskRepository.SaveChangesAsync()) return task;
             }
 
-            return null;
+            throw new Exception(Messages.ExistingTask);
         }
 
         public async Task<bool> ConcludeTask(TaskModel task)
