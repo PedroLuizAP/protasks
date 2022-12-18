@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ExistingTask" xml:space="preserve">
+    <value>You sent an already created task.</value>
+    <comment>This message is sent when the user sends an already created task.</comment>
+  </data>
   <data name="RepeatedTitle" xml:space="preserve">
     <value>You have already created a task with this title.</value>
     <comment>This message is displayed in the error when there is already a task with that title.</comment>

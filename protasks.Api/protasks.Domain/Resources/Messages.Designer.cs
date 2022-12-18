@@ -61,6 +61,15 @@ namespace protasks.Domain.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a You sent an already created task..
+        /// </summary>
+        public static string ExistingTask {
+            get {
+                return ResourceManager.GetString("ExistingTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a You have already created a task with this title..
         /// </summary>
         public static string RepeatedTitle {
