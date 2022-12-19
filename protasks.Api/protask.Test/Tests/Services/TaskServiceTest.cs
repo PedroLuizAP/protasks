@@ -20,11 +20,20 @@ namespace protask.Test.Tests.Services
 
         [Theory]
         [ClassData(typeof(TitleError))]
-        public async Task AddTask_Test_WithThrow(TaskModel task)
+        public async Task AddTask_Test_TitleThrow(TaskModel task)
         {
             var exception = await Assert.ThrowsAsync<Exception>(() =>  _taskService.AddTask(task));
 
             Assert.Matches(exception.Message, Messages.RepeatedTitle);
+        }
+        
+        [Theory]
+        [ClassData(typeof(CompleteTask))]
+        public async Task AddTask_Test_IdThrow(TaskModel task)
+        {
+            var exception = await Assert.ThrowsAsync<Exception>(() =>  _taskService.AddTask(task));
+
+            Assert.Matches(exception.Message, Messages.ExistingTask);
         }
     }
 }
