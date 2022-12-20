@@ -5,7 +5,6 @@ using protasks.Domain.Interfaces.Repository;
 using protasks.Domain.Services;
 using protasks.Domain.Resources;
 
-
 namespace protask.Test.Tests.Services
 {
     public class TaskServiceTest : BaseTest
@@ -22,18 +21,27 @@ namespace protask.Test.Tests.Services
         [ClassData(typeof(TitleError))]
         public async Task AddTask_Test_TitleThrow(TaskModel task)
         {
-            var exception = await Assert.ThrowsAsync<Exception>(() =>  _taskService.AddTask(task));
+            var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.AddTask(task));
 
             Assert.Matches(exception.Message, Messages.RepeatedTitle);
         }
-        
+
         [Theory]
         [ClassData(typeof(CompleteTask))]
         public async Task AddTask_Test_IdThrow(TaskModel task)
         {
-            var exception = await Assert.ThrowsAsync<Exception>(() =>  _taskService.AddTask(task));
+            var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.AddTask(task));
 
             Assert.Matches(exception.Message, Messages.ExistingTask);
+        }
+
+        [Theory]
+        [ClassData(typeof(TaskWithoutId))]
+        public async Task AddTask_Test_WithResult(TaskModel task)
+        {
+            await _taskService.AddTask(task);
+
+            Assert.NotEqual(0, task.Id);
         }
     }
 }
