@@ -8,13 +8,13 @@ namespace protask.Test.Tests
     {
         private readonly DbContextOptions<DataContext> _dbContextOptions;
         protected DataContext DataContext { get; set; }
-        protected BaseTest(bool mock = true)
+        protected BaseTest()
         {
             _dbContextOptions = ContextHelper.GetOptionsBuilder();
 
             DataContext = new(_dbContextOptions);
 
-            if (mock) DataContext.MockContext();
+            DataContext.MockContext();
         }
     }
 }
