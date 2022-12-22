@@ -27,7 +27,7 @@ namespace protasks.Domain.Services
 
         public async Task<bool> ConcludeTask(TaskModel task)
         {
-            if (task == null) throw new Exception("Please submit a valid task");
+            if (task == null) throw new Exception(Messages.InvalidTask);
 
             task.Conclude();
 
