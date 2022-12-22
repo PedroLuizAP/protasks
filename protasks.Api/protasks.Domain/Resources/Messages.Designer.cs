@@ -70,6 +70,15 @@ namespace protasks.Domain.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Please submit a valid task.
+        /// </summary>
+        public static string InvalidTask {
+            get {
+                return ResourceManager.GetString("InvalidTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a You have already created a task with this title..
         /// </summary>
         public static string RepeatedTitle {

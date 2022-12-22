@@ -121,6 +121,10 @@
     <value>You sent an already created task.</value>
     <comment>This message is sent when the user sends an already created task.</comment>
   </data>
+  <data name="InvalidTask" xml:space="preserve">
+    <value>Please submit a valid task</value>
+    <comment>This message is sent when the user sends an invalid Task.</comment>
+  </data>
   <data name="RepeatedTitle" xml:space="preserve">
     <value>You have already created a task with this title.</value>
     <comment>This message is displayed in the error when there is already a task with that title.</comment>
