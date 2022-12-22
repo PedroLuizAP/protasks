@@ -43,5 +43,14 @@ namespace protask.Test.Tests.Services
 
             Assert.NotEqual(0, task.Id);
         }
+        
+        [Theory]
+        [InlineData(null)]
+        public async Task ConcludeTask_Test_InvalidThrow(TaskModel task)
+        {
+            var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.ConcludeTask(task));
+
+            Assert.Matches(exception.Message, Messages.InvalidTask);
+        }
     }
 }
