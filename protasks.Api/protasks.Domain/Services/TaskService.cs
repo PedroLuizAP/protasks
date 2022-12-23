@@ -27,6 +27,8 @@ namespace protasks.Domain.Services
 
         public async Task<bool> ConcludeTask(TaskModel task)
         {
+            var task = await _taskRepository.GetByIdAsync(id);
+
             if (task == null) throw new Exception(Messages.InvalidTask);
 
             task.Conclude();
