@@ -15,7 +15,7 @@
         public TaskModel(long id, string title, string description) : this()
         {
             Id = id;
-            title = Title;
+            Title = title;
             Description = description;
         }
 
