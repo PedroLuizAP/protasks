@@ -25,7 +25,7 @@ namespace protasks.Domain.Services
             throw new Exception(Messages.ExistingTask);
         }
 
-        public async Task<bool> ConcludeTask(TaskModel task)
+        public async Task<bool> ConcludeTask(long id)
         {
             var task = await _taskRepository.GetByIdAsync(id);
 
@@ -37,7 +37,6 @@ namespace protasks.Domain.Services
 
             return await _taskRepository.SaveChangesAsync();
         }
-
         public async Task<bool> DeleteTask(long idTask)
         {
             var task = await _taskRepository.GetByIdAsync(idTask);
