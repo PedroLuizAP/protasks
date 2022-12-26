@@ -79,6 +79,15 @@ namespace protasks.Domain.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The submitted task does not exist.
+        /// </summary>
+        public static string NotExistTask {
+            get {
+                return ResourceManager.GetString("NotExistTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a You have already created a task with this title..
         /// </summary>
         public static string RepeatedTitle {

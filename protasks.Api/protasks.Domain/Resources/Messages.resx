@@ -125,6 +125,10 @@
     <value>Please submit a valid task</value>
     <comment>This message is sent when the user sends an invalid Task.</comment>
   </data>
+  <data name="NotExistTask" xml:space="preserve">
+    <value>The submitted task does not exist</value>
+    <comment>This message is sent when the submitted task is non-existent</comment>
+  </data>
   <data name="RepeatedTitle" xml:space="preserve">
     <value>You have already created a task with this title.</value>
     <comment>This message is displayed in the error when there is already a task with that title.</comment>
