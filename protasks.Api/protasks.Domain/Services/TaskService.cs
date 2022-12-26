@@ -42,7 +42,7 @@ namespace protasks.Domain.Services
         {
             var task = await _taskRepository.GetByIdAsync(idTask);
 
-            if (task == null) throw new Exception("Please submit a valid task");
+            if (task == null) throw new Exception(Messages.NotExistTask);
 
             _taskRepository.Delete(task);
 
