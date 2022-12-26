@@ -4,6 +4,7 @@ using protasks.Domain.Entities;
 using protasks.Domain.Interfaces.Repository;
 using protasks.Domain.Services;
 using protasks.Domain.Resources;
+using System.Threading.Tasks;
 
 namespace protask.Test.Tests.Services
 {
@@ -42,6 +43,15 @@ namespace protask.Test.Tests.Services
             await _taskService.AddTask(task);
 
             Assert.NotEqual(0, task.Id);
+        }
+        
+        [Theory]
+        [InlineData(0)]
+        public async Task DeleteTask_Test_IdThrow(long id)
+        {
+            var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.DeleteTask(id));
+
+            Assert.Matches(exception.Message, Messages.NotExistTask);
         }
 
         #region Out of use
