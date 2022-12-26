@@ -2,9 +2,8 @@
 using protasks.Data.Repository;
 using protasks.Domain.Entities;
 using protasks.Domain.Interfaces.Repository;
-using protasks.Domain.Services;
 using protasks.Domain.Resources;
-using System.Threading.Tasks;
+using protasks.Domain.Services;
 
 namespace protask.Test.Tests.Services
 {
@@ -44,7 +43,7 @@ namespace protask.Test.Tests.Services
 
             Assert.NotEqual(0, task.Id);
         }
-        
+
         [Theory]
         [InlineData(0)]
         public async Task DeleteTask_Test_IdThrow(long id)
