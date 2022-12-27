@@ -24,20 +24,19 @@ namespace protasks.Domain.Services
 
             throw new Exception(Messages.ExistingTask);
         }
-        #region Out of use
-        //public async Task<bool> ConcludeTask(long id)
-        //{
-        //    var task = await _taskRepository.GetByIdAsync(id);
+        public async Task<bool> ConcludeTask(long id)
+        {
+            var task = await _taskRepository.GetByIdAsync(id);
 
-        //    if (task == null) throw new Exception(Messages.InvalidTask);
+            if (task == null) throw new Exception(Messages.InvalidTask);
 
-        //    task.Conclude();
+            task.Conclude();
 
-        //    _taskRepository.Update(task!);
+            _taskRepository.Update(task!);
 
-        //    return await _taskRepository.SaveChangesAsync();
-        //}
-        #endregion
+            return await _taskRepository.SaveChangesAsync();
+        }
+
         public async Task<bool> DeleteTask(long idTask)
         {
             var task = await _taskRepository.GetByIdAsync(idTask);
