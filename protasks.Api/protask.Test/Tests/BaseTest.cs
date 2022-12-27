@@ -15,6 +15,8 @@ namespace protask.Test.Tests
             DataContext = new(_dbContextOptions);
 
             DataContext.MockContext();
+
+            DataContext.ChangeTracker.Clear();
         }
     }
 }
