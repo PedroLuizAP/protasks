@@ -54,23 +54,23 @@ namespace protask.Test.Tests.Services
         }
 
         #region Out of use
-        //[Theory]
-        //[InlineData(0)]
-        //public async Task ConcludeTask_Test_InvalidThrow(long id)
-        //{
-        //    var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.ConcludeTask(id));
+        [Theory]
+        [InlineData(0)]
+        public async Task ConcludeTask_Test_InvalidThrow(long id)
+        {
+            var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.ConcludeTask(id));
 
-        //    Assert.Matches(exception.Message, Messages.InvalidTask);
-        //}
+            Assert.Matches(exception.Message, Messages.InvalidTask);
+        }
 
-        //[Theory]
-        //[InlineData(2)]
-        //public async Task ConcludeTask_Test_WithResult(long id)
-        //{
-        //    var concludeTask = await _taskService.ConcludeTask(id);
+        [Theory]
+        [InlineData(2)]
+        public async Task ConcludeTask_Test_WithResult(long id)
+        {
+            var concludeTask = await _taskService.ConcludeTask(id);
 
-        //    Assert.True(concludeTask);
-        //} 
+            Assert.True(concludeTask);
+        }
         #endregion
     }
 }
