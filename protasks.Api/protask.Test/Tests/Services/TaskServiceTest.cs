@@ -53,7 +53,6 @@ namespace protask.Test.Tests.Services
             Assert.Matches(exception.Message, Messages.NotExistTask);
         }
 
-        #region Out of use
         [Theory]
         [InlineData(0)]
         public async Task ConcludeTask_Test_InvalidThrow(long id)
@@ -71,6 +70,5 @@ namespace protask.Test.Tests.Services
 
             Assert.True(concludeTask);
         }
-        #endregion
     }
 }
