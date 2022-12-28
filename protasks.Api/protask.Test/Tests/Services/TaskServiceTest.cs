@@ -70,5 +70,14 @@ namespace protask.Test.Tests.Services
 
             Assert.True(concludeTask);
         }
+        
+        [Theory]
+        [InlineData(3)]
+        public async Task Delete_Test_WithResult(long id)
+        {
+            var concludeTask = await _taskService.DeleteTask(id);
+
+            Assert.True(concludeTask);
+        }
     }
 }
