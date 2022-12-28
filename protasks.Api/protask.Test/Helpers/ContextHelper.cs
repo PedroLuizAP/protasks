@@ -15,6 +15,7 @@ namespace protask.Test.Helpers
             {
                 context.Add(new TaskModel { Id = 1, Title = "TesteUnit", Description = "Teste", Priority = Priority.Low });
                 context.Add(new TaskModel { Id = 2, Title = "Conclude", Description = "Conclude", Priority = Priority.Low });
+                context.Add(new TaskModel { Id = 3, Title = "Conclude", Description = "Conclude", Priority = Priority.Low });
 
                 context.SaveChanges();
             }
