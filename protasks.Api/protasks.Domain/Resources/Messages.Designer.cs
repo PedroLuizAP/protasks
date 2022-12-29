@@ -95,5 +95,14 @@ namespace protasks.Domain.Resources {
                 return ResourceManager.GetString("RepeatedTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Unable to update a completed task.
+        /// </summary>
+        public static string UpdateCompletedTask {
+            get {
+                return ResourceManager.GetString("UpdateCompletedTask", resourceCulture);
+            }
+        }
     }
 }

@@ -133,4 +133,8 @@
     <value>You have already created a task with this title.</value>
     <comment>This message is displayed in the error when there is already a task with that title.</comment>
   </data>
+  <data name="UpdateCompletedTask" xml:space="preserve">
+    <value>Unable to update a completed task</value>
+    <comment>This message is triggered when an attempt is made to edit a completed task</comment>
+  </data>
 </root>
