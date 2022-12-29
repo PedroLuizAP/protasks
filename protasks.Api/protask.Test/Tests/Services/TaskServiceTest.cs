@@ -46,15 +46,6 @@ namespace protask.Test.Tests.Services
 
         [Theory]
         [InlineData(0)]
-        public async Task DeleteTask_Test_IdThrow(long id)
-        {
-            var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.DeleteTask(id));
-
-            Assert.Matches(exception.Message, Messages.NotExistTask);
-        }
-
-        [Theory]
-        [InlineData(0)]
         public async Task ConcludeTask_Test_InvalidThrow(long id)
         {
             var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.ConcludeTask(id));
@@ -70,7 +61,16 @@ namespace protask.Test.Tests.Services
 
             Assert.True(concludeTask);
         }
-        
+
+        [Theory]
+        [InlineData(0)]
+        public async Task DeleteTask_Test_IdThrow(long id)
+        {
+            var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.DeleteTask(id));
+
+            Assert.Matches(exception.Message, Messages.NotExistTask);
+        }
+
         [Theory]
         [InlineData(3)]
         public async Task Delete_Test_WithResult(long id)
@@ -78,6 +78,6 @@ namespace protask.Test.Tests.Services
             var concludeTask = await _taskService.DeleteTask(id);
 
             Assert.True(concludeTask);
-        }
+        }        
     }
 }
