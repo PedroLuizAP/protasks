@@ -74,7 +74,7 @@ namespace protasks.Domain.Services
 
         public async Task<TaskModel> UpdateTask(TaskModel task)
         {
-            if (task.ConclusionDate != null) throw new Exception("Unable to update a completed task");
+            if (task.ConclusionDate != null) throw new Exception(Messages.UpdateCompletedTask);
 
             if (await _taskRepository.GetByIdAsync(task.Id) != null)
             {
