@@ -76,14 +76,13 @@ namespace protasks.Domain.Services
         {
             if (task.ConclusionDate != null) throw new Exception(Messages.UpdateCompletedTask);
 
-            if (await _taskRepository.GetByIdAsync(task.Id) != null)
-            {
-                _taskRepository.Update(task);
+            if (await _taskRepository.GetByIdAsync(task.Id) == null) throw new Exception(Messages.NotExistTask);
 
-                if (await _taskRepository.SaveChangesAsync()) return task;
-            }
+            _taskRepository.Update(task);
 
-            return null;
+            if (await _taskRepository.SaveChangesAsync()) return task;
+
+            throw new Exception(Messages.DatabaseError);
         }
     }
 }
