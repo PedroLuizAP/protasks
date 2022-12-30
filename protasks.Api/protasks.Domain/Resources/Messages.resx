@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DatabaseError" xml:space="preserve">
+    <value>An error occurred when executing the command on the Database</value>
+    <comment>This message is sent when the bank is unable to complete a command</comment>
+  </data>
   <data name="ExistingTask" xml:space="preserve">
     <value>You sent an already created task.</value>
     <comment>This message is sent when the user sends an already created task.</comment>

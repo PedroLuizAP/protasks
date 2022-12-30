@@ -61,6 +61,15 @@ namespace protasks.Domain.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a An error occurred when executing the command on the Database.
+        /// </summary>
+        public static string DatabaseError {
+            get {
+                return ResourceManager.GetString("DatabaseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a You sent an already created task..
         /// </summary>
         public static string ExistingTask {
