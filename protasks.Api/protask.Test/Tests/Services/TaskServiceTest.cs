@@ -78,6 +78,15 @@ namespace protask.Test.Tests.Services
             var concludeTask = await _taskService.DeleteTask(id);
 
             Assert.True(concludeTask);
-        }        
+        }
+
+        [Theory]
+        [ClassData(typeof(ConcludeTask))]
+        public async Task UpdateTask_Test_ConcludeThrow(TaskModel task)
+        {
+            var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.UpdateTask(task));
+
+            Assert.Matches(exception.Message, Messages.UpdateCompletedTask);
+        }
     }
 }
