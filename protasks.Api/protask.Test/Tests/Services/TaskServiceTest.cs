@@ -88,5 +88,14 @@ namespace protask.Test.Tests.Services
 
             Assert.Matches(exception.Message, Messages.UpdateCompletedTask);
         }
+        
+        [Theory]
+        [ClassData(typeof(TaskWithoutId))]
+        public async Task UpdateTask_Test_NotExistThrow(TaskModel task)
+        {
+            var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.UpdateTask(task));
+
+            Assert.Matches(exception.Message, Messages.NotExistTask);
+        }
     }
 }
