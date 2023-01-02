@@ -56,7 +56,7 @@ namespace protasks.Domain.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"API erro {ex.Message}");
+                throw new Exception($"API error {ex.Message}");
             }
         }
 
@@ -68,7 +68,7 @@ namespace protasks.Domain.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"API erro {ex.Message}");
+                throw new Exception($"API error {ex.Message}");
             }
         }
 
