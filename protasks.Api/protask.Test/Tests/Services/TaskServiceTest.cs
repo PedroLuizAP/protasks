@@ -106,5 +106,22 @@ namespace protask.Test.Tests.Services
 
             Assert.NotEqual(0, task.Id);
         }
+        
+        [Theory]
+        [InlineData(1)]
+        public async Task GetTaskById_Test_WithResult(long id)
+        {
+            var task = await _taskService.GetTaskByIdAsync(id);
+
+            Assert.NotNull(task.Id);
+        }
+        
+        [Fact]
+        public async Task GetAllTasksAsync_Test_WithResult()
+        {
+            var tasks = await _taskService.GetAllTasksAsync();
+
+            Assert.NotEmpty(tasks);
+        }
     }
 }
