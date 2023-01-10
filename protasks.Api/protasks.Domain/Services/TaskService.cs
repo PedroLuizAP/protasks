@@ -15,14 +15,13 @@ namespace protasks.Domain.Services
         {
             if (await _taskRepository.GetByTitleAsync(task.Title) != null) throw new Exception(Messages.RepeatedTitle);
 
-            if (await _taskRepository.GetByIdAsync(task.Id) == null)
-            {
-                _taskRepository.Add(task);
+            if (await _taskRepository.GetByIdAsync(task.Id) == null) throw new Exception(Messages.ExistingTask);
 
-                if (await _taskRepository.SaveChangesAsync()) return task;
-            }
+            _taskRepository.Add(task);
 
-            throw new Exception(Messages.ExistingTask);
+            if (await _taskRepository.SaveChangesAsync()) return task;
+
+            throw new Exception(Messages.DatabaseError);
         }
         public async Task<bool> ConcludeTask(long id)
         {
