@@ -113,9 +113,9 @@ namespace protask.Test.Tests.Services
         {
             var task = await _taskService.GetTaskByIdAsync(id);
 
-            Assert.NotNull(task.Id);
+            Assert.NotEqual(0, task.Id);
         }
-        
+
         [Fact]
         public async Task GetAllTasksAsync_Test_WithResult()
         {
