@@ -22,36 +22,36 @@ namespace protask.Test.Tests.Repository
         [InlineData(1)]
         internal async Task GetByIdAsync_Test_WithResult(long id)
         {
-            var allTask = await _taskRepository.GetByIdAsync(id);
+            var task = await _taskRepository.GetByIdAsync(id);
 
-            Assert.NotNull(allTask);
+            Assert.NotNull(task);
         }
 
         [Theory]
         [InlineData(0)]
         internal async Task GetByIdAsync_Test_WithoutResult(long id)
         {
-            var allTask = await _taskRepository.GetByIdAsync(id);
+            var task = await _taskRepository.GetByIdAsync(id);
 
-            Assert.Null(allTask);
+            Assert.Null(task);
         }
 
         [Theory]
         [InlineData("TesteUnit")]
         internal async Task GetByTitleAsync_Test_WithResult(string title)
         {
-            var allTask = await _taskRepository.GetByTitleAsync(title);
+            var task = await _taskRepository.GetByTitleAsync(title);
 
-            Assert.NotNull(allTask);
+            Assert.NotNull(task);
         }
 
         [Theory]
         [InlineData("")]
         internal async Task GetByTitleAsync_Test_WithoutResult(string title)
         {
-            var allTask = await _taskRepository.GetByTitleAsync(title);
+            var task = await _taskRepository.GetByTitleAsync(title);
 
-            Assert.Null(allTask);
+            Assert.Null(task);
         }
     }
 }
