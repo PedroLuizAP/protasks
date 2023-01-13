@@ -24,7 +24,7 @@ namespace protask.Test.Tests.Repository
         {
             var task = await _taskRepository.GetByIdAsync(id);
 
-            Assert.NotNull(task);
+            Assert.NotEqual(0, task.Id);
         }
 
         [Theory]
@@ -42,7 +42,7 @@ namespace protask.Test.Tests.Repository
         {
             var task = await _taskRepository.GetByTitleAsync(title);
 
-            Assert.NotNull(task);
+            Assert.NotEqual(0, task.Id);
         }
 
         [Theory]
