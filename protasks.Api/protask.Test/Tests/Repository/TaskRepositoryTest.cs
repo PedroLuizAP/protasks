@@ -24,7 +24,7 @@ namespace protask.Test.Tests.Repository
         {
             var task = await _taskRepository.GetByIdAsync(id);
 
-            Assert.NotEqual(0, task.Id);
+            Assert.NotEqual(0, task?.Id);
         }
 
         [Theory]
@@ -43,10 +43,10 @@ namespace protask.Test.Tests.Repository
             var task = await _taskRepository.GetByTitleAsync(title);
 
             Assert.NotEqual(0, task.Id);
-        }
+        } 
 
         [Theory]
-        [InlineData("")]
+        [InlineData(string.Empty)]
         internal async Task GetByTitleAsync_Test_WithoutResult(string title)
         {
             var task = await _taskRepository.GetByTitleAsync(title);
