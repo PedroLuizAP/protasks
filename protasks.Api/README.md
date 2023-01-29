@@ -19,3 +19,8 @@ If you want to see the C# test page add this to url `swagger/index.html`.
 ### `dotnet watch run`
 
 Starts the application and can make changes without restarting the project.
+
+
+### `dotnet test`
+
+run the application tests
