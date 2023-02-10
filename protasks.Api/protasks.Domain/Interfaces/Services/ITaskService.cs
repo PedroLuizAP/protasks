@@ -9,6 +9,6 @@ namespace protasks.Domain.Interfaces.Services
         Task<bool> DeleteTask(long idTask);
         Task<bool> ConcludeTask(long id);
         Task<TaskModel[]> GetAllTasksAsync();
-        Task<TaskModel> GetTaskByIdAsync(long idTask);
+        Task<TaskModel?> GetTaskByIdAsync(long idTask);
     }
 }

@@ -59,7 +59,7 @@ namespace protasks.Domain.Services
             }
         }
 
-        public async Task<TaskModel> GetTaskByIdAsync(long idTask)
+        public async Task<TaskModel?> GetTaskByIdAsync(long idTask)
         {
             try
             {
