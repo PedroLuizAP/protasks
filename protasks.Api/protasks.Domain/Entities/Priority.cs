@@ -6,6 +6,5 @@
         Low,
         Normal,
         High,
-
     }
 }
