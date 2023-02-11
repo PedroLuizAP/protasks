@@ -16,6 +16,5 @@ namespace protasks.Data.Repository
         public void Delete<T>(T entity) where T : class => _context.Remove(entity);
         public void Update<T>(T entity) where T : class => _context.Update(entity);
         public async Task<bool> SaveChangesAsync() => await _context.SaveChangesAsync() > 0;
-        //public void DeleteRange<T>(T entity) where T : class => _context.RemoveRange(entity);
     }
 }
