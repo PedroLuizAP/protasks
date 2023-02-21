@@ -113,7 +113,7 @@ namespace protask.Test.Tests.Services
         {
             var task = await _taskService.GetTaskByIdAsync(id);
 
-            Assert.NotEqual(0, task.Id);
+            Assert.NotEqual(0, task?.Id);
         }
 
         [Fact]
