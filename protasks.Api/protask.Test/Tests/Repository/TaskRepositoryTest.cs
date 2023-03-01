@@ -5,9 +5,8 @@ namespace protask.Test.Tests.Repository
     public class TaskRepositoryTest : BaseTest
     {
         private readonly TaskRepository _taskRepository;
-        public TaskRepositoryTest() : base() => _taskRepository = new(DataContext);
+        public TaskRepositoryTest() => _taskRepository = new(DataContext);
         
-
         [Fact]
         internal async Task GetAllAsync_Test_NotEmpty()
         {
