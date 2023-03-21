@@ -13,7 +13,6 @@ namespace protask.Test.TestData.Task
     {
         public static BaseTaskTestData Current { get; set; } = new();
         public List<TaskModel> Tasks { get; set; }
-
         public BaseTaskTestData() { }
 
         public IEnumerator<object[]> GetEnumerator()
